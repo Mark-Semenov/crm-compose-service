@@ -1,0 +1,30 @@
+server:
+  port: 0
+spring:
+  application:
+    name: compose-service
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: mark
+    password: password
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      default-zone:
+        - http://localhost:8761/eureka/
+
+logging:
+  level:
+    web: debug
+  file:
+    name: ./log/compose-service
+
+crm:
+  queue:
+    baseUrl: http://localhost:80
+    customerUrl: /customer-service/api/v1/
+    companyUrl: /company-service/api/v1/
