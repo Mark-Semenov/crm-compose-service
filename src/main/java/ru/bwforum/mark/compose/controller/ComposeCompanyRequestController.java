@@ -2,10 +2,7 @@ package ru.bwforum.mark.compose.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import ru.bwforum.mark.compose.dto.CompanyDTO;
 import ru.bwforum.mark.compose.dto.CustomerDTO;
@@ -13,6 +10,7 @@ import ru.bwforum.mark.compose.service.CompanyService;
 import ru.bwforum.mark.compose.service.CustomerService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class ComposeCompanyRequestController {
