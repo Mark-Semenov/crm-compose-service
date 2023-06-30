@@ -4,11 +4,13 @@ spring:
   application:
     name: compose-service
 
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: mark
-    password: password
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8000/realms/crm_realm
+
+
 eureka:
   instance:
     prefer-ip-address: true
