@@ -30,32 +30,34 @@ public class CompanyServiceImpl implements CompanyService {
     private final WebClient webClient;
 
     @Override
-    public Mono<CompanyDTO> getReadyDto(String companyId) {
-        return buildCompanyDto(companyId);
+    public Mono<CompanyDTO> getReadyDto(String companyId, String token) {
+        return buildCompanyDto(companyId, token);
     }
 
 
     @Override
-    public Mono<CompanyDTO> buildCompanyDto(String id) {
-        return getCompanyDtoById(createUrl(companyUrl, GET_COMPANY_BY_ID.path), id)
-                .zipWith(getCustomersDtoByCompanyId(createUrl(customerUrl, GET_CUSTOMERS_BY_COMPANY_ID.path), id)
+    public Mono<CompanyDTO> buildCompanyDto(String id, String token) {
+        return getCompanyDtoById(createUrl(companyUrl, GET_COMPANY_BY_ID.path), id, token)
+                .zipWith(getCustomersDtoByCompanyId(createUrl(customerUrl, GET_CUSTOMERS_BY_COMPANY_ID.path), id, token)
                         .collectList(), this::putCustomersToCompany);
     }
 
     @Override
-    public Mono<CompanyDTO> getCompanyDtoById(String url, String id) {
+    public Mono<CompanyDTO> getCompanyDtoById(String url, String id, String token) {
         return webClient
                 .get()
                 .uri(url, id)
+                .headers(h -> h.setBearerAuth(token))
                 .retrieve()
                 .bodyToMono(CompanyDTO.class);
     }
 
     @Override
-    public Flux<CustomerDTO> getCustomersDtoByCompanyId(String url, String id) {
+    public Flux<CustomerDTO> getCustomersDtoByCompanyId(String url, String id, String token) {
         return webClient
                 .get()
                 .uri(url, id)
+                .headers(h -> h.setBearerAuth(token))
                 .retrieve()
                 .bodyToFlux(CustomerDTO.class);
     }

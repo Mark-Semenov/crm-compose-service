@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface CustomerService {
 
-    Mono<CustomerDTO> getReadyDto(String customerId);
+    Mono<CustomerDTO> getReadyDto(String customerId, String token);
 
-    Mono<CustomerDTO> buildCustomerDto(String id);
+    Mono<CustomerDTO> buildCustomerDto(String id, String token);
 
-    Mono<CustomerDTO> getCustomerDtoById(String url, String id);
+    Mono<CustomerDTO> getCustomerDtoById(String url, String id, String token);
 
-    Flux<CompanyDTO> getCompaniesDtoByCustomerId(String url, String id);
+    Flux<CompanyDTO> getCompaniesDtoByCustomerId(String url, String id, String token);
 
     CustomerDTO putCompaniesToCustomer(CustomerDTO customer, List<CompanyDTO> companies);
 
