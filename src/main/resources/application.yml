@@ -1,3 +1,5 @@
+KEYCLOAK_URL: http://localhost:8000/realms/crm_realm/protocol/openid-connect/certs
+
 server:
   port: 0
 spring:
@@ -8,7 +10,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8000/realms/crm_realm
+          jwk-set-uri: ${KEYCLOAK_URL}
 
 
 eureka:
